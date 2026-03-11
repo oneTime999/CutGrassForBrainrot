@@ -7,11 +7,11 @@ return function(Window)
     })
 
     local TeleportSection = Tab:Section({
-        Title = "Island Teleports",
+        Title = "Zone Teleports",
     })
 
     TeleportSection:Paragraph({
-        Title = "How to use",
+        Title = "How To Use",
         Desc = "Select the desired island from the dropdown below, then click the Teleport button to teleport to the selected zone.",
     })
 
@@ -19,11 +19,11 @@ return function(Window)
     TeleportZones(TeleportSection)
 
     local BaseSection = Tab:Section({
-        Title = "TP to Base",
+        Title = "Teleport to Base",
     })
 
     BaseSection:Paragraph({
-        Title = "How to use",
+        Title = "How To Use",
         Desc = "Click the TP to Base button to instantly teleport back to your base.",
     })
 
@@ -35,7 +35,7 @@ return function(Window)
     })
 
     GrassSection:Paragraph({
-        Title = "How to use",
+        Title = "How To Use",
         Desc = "Click the Remove Grass button to destroy all GrassLine objects in the workspace.",
     })
 
