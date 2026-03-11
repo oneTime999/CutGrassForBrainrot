@@ -21,7 +21,7 @@ return function(Tab)
 
     Tab:Dropdown({
         Name    = "Select Zone",
-        Options = ZoneOrder,
+        Items   = ZoneOrder,
         Default = ZoneOrder[1],
         Flag    = "SelectedZone",
         Callback = function(Value)
