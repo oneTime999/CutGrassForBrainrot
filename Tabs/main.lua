@@ -6,15 +6,27 @@ return function(Window)
         Icon = "house",
     })
 
-    local Section = Tab:Section({
+    local TeleportSection = Tab:Section({
         Title = "Island Teleports",
     })
 
-    Section:Paragraph({
+    TeleportSection:Paragraph({
         Title = "How to use",
         Desc = "Select the desired island from the dropdown below, then click the Teleport button to teleport to the selected zone.",
     })
 
     local TeleportZones = loadstring(game:HttpGet(RepoURL .. "Functions/teleportzones.lua", true))()
-    TeleportZones(Section)
+    TeleportZones(TeleportSection)
+
+    local GrassSection = Tab:Section({
+        Title = "Grass",
+    })
+
+    GrassSection:Paragraph({
+        Title = "How to use",
+        Desc = "Click the Remove Grass button to destroy all GrassLine objects in the workspace.",
+    })
+
+    local RemoveGrass = loadstring(game:HttpGet(RepoURL .. "Functions/removegrass.lua", true))()
+    RemoveGrass(GrassSection)
 end
