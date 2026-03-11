@@ -7,7 +7,7 @@ local WindUI = loadstring(game:HttpGet(
 
 local Window = WindUI:CreateWindow({
     Title = "Slow Hub",
-    Icon = "zap",
+    Icon = "moon",
     Author = "Slow Hub Team",
     Folder = "SlowHub",
     Size = UDim2.fromOffset(580, 460),
