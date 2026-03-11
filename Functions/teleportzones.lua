@@ -11,26 +11,24 @@ local Zones = {
 
 local ZoneOrder = {
     "Zone 1", "Zone 2", "Zone 3", "Zone 4",
-    "Zone 5", "Zone 6", "Zone 7", "Zone 8"
+    "Zone 5", "Zone 6", "Zone 7", "Zone 8",
 }
 
 local SelectedZone = ZoneOrder[1]
 
-return function(Tab)
-    Tab:Section({ Name = "Teleport Zones" })
-
-    Tab:Dropdown({
-        Name    = "Select Zone",
-        Items   = ZoneOrder,
-        Default = ZoneOrder[1],
-        Flag    = "SelectedZone",
+return function(Parent)
+    local Dropdown = Parent:Dropdown({
+        Title = "Select Zone",
+        Values = ZoneOrder,
+        Value = ZoneOrder[1],
+        Multi = false,
         Callback = function(Value)
             SelectedZone = Value
         end,
     })
 
-    Tab:Button({
-        Name = "Teleport",
+    Parent:Button({
+        Title = "Teleport",
         Callback = function()
             local Character = game.Players.LocalPlayer.Character
             if Character and Character:FindFirstChild("HumanoidRootPart") then
