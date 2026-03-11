@@ -11,17 +11,24 @@ return function(Window)
     })
 
     TeleportSection:Paragraph({
-        Title = "How to use - Island Teleport",
+        Title = "How to use",
         Desc = "Select the desired island from the dropdown below, then click the Teleport button to teleport to the selected zone.",
-    })
-
-    TeleportSection:Paragraph({
-        Title = "How to use - TP to Base",
-        Desc = "Click the TP to Base button to instantly teleport back to your base.",
     })
 
     local TeleportZones = loadstring(game:HttpGet(RepoURL .. "Functions/teleportzones.lua", true))()
     TeleportZones(TeleportSection)
+
+    local BaseSection = Tab:Section({
+        Title = "TP to Base",
+    })
+
+    BaseSection:Paragraph({
+        Title = "How to use",
+        Desc = "Click the TP to Base button to instantly teleport back to your base.",
+    })
+
+    local TeleportBase = loadstring(game:HttpGet(RepoURL .. "Functions/teleportbase.lua", true))()
+    TeleportBase(BaseSection)
 
     local GrassSection = Tab:Section({
         Title = "Grass",
