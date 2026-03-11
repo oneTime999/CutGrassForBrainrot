@@ -27,6 +27,10 @@ return function(Window)
         Desc = "Click the Remove Grass button to destroy all GrassLine objects in the workspace.",
     })
 
-    local RemoveGrass = loadstring(game:HttpGet(RepoURL .. "Functions/removegrass.lua", true))()
-    RemoveGrass(GrassSection)
+    GrassSection:Button({
+        Title = "Remove Grass",
+        Callback = function()
+            loadstring(game:HttpGet(RepoURL .. "Functions/removegrass.lua", true))()
+        end,
+    })
 end
