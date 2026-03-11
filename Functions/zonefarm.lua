@@ -1,0 +1,91 @@
+return function(Parent, ZoneIndex)
+    local ZoneName = "Lava_" .. ZoneIndex
+    local SelectedBrainrot = nil
+    local AutoResetLoop = false
+
+    local function getBrainrots()
+        local list = {}
+        local SpawnZone = workspace:FindFirstChild("Zones")
+            and workspace.Zones:FindFirstChild(ZoneName)
+            and workspace.Zones[ZoneName]:FindFirstChild("SpawnZone")
+
+        if SpawnZone then
+            for _, obj in ipairs(SpawnZone:GetChildren()) do
+                if obj:IsA("Model") then
+                    table.insert(list, obj.Name)
+                end
+            end
+        end
+
+        if #list == 0 then
+            table.insert(list, "No Brainrots Found")
+        end
+
+        return list
+    end
+
+    local Dropdown = Parent:Dropdown({
+        Title = "Zone " .. ZoneIndex .. " - Select Brainrot",
+        Values = getBrainrots(),
+        Value = getBrainrots()[1],
+        Multi = false,
+        Callback = function(Value)
+            SelectedBrainrot = Value
+        end,
+    })
+
+    Parent:Button({
+        Title = "Refresh List",
+        Desc = "Refresh the brainrot list for Zone " .. ZoneIndex,
+        Callback = function()
+            local newList = getBrainrots()
+            Dropdown:Refresh(newList)
+        end,
+    })
+
+    Parent:Button({
+        Title = "Teleport to Brainrot",
+        Desc = "Teleport to the selected brainrot in Zone " .. ZoneIndex,
+        Callback = function()
+            if not SelectedBrainrot or SelectedBrainrot == "No Brainrots Found" then return end
+
+            local SpawnZone = workspace:FindFirstChild("Zones")
+                and workspace.Zones:FindFirstChild(ZoneName)
+                and workspace.Zones[ZoneName]:FindFirstChild("SpawnZone")
+
+            if not SpawnZone then return end
+
+            local Target = SpawnZone:FindFirstChild(SelectedBrainrot)
+            if not Target then return end
+
+            local Part = Target.PrimaryPart or Target:FindFirstChildWhichIsA("BasePart")
+            if not Part then return end
+
+            local Character = game.Players.LocalPlayer.Character
+            if Character and Character:FindFirstChild("HumanoidRootPart") then
+                Character.HumanoidRootPart.CFrame = Part.CFrame + Vector3.new(0, 5, 0)
+            end
+        end,
+    })
+
+    Parent:Toggle({
+        Title = "Auto Reset (Loop)",
+        Desc = "Resets your character every 1 second automatically.",
+        Default = false,
+        Callback = function(Value)
+            AutoResetLoop = Value
+            if Value then
+                task.spawn(function()
+                    while AutoResetLoop do
+                        local humanoid = game.Players.LocalPlayer.Character
+                            and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                        if humanoid then
+                            humanoid.Health = 0
+                        end
+                        task.wait(1)
+                    end
+                end)
+            end
+        end,
+    })
+end
