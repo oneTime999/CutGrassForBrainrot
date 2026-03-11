@@ -16,7 +16,6 @@ local Window = WindUI:CreateWindow({
     SideBarWidth = 200,
 })
 
-Window:Browser()
 Window:Intro({
     Icon   = "zap",
     Title  = "Slow Hub",
