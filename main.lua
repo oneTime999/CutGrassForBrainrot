@@ -22,5 +22,5 @@ local Tabs = {
 }
 
 for _, TabName in ipairs(Tabs) do
-    loadstring(game:HttpGet(RepoURL .. "Tabs/" .. TabName .. ".lua", true))(Window)
+    loadstring(game:HttpGet(RepoURL .. "Tabs/" .. TabName .. ".lua", true))()(Window)
 end
