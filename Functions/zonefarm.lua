@@ -1,16 +1,13 @@
 return function(Parent, ZoneIndex)
     local ZoneName = "Lava_" .. ZoneIndex
     local SelectedBrainrot = nil
-
-    local function getSpawnZone()
-        return workspace:FindFirstChild("Zones")
-            and workspace.Zones:FindFirstChild(ZoneName)
-            and workspace.Zones[ZoneName]:FindFirstChild("SpawnZone")
-    end
+    local AutoResetLoop = false
 
     local function getBrainrots()
         local list = {}
-        local SpawnZone = getSpawnZone()
+        local SpawnZone = workspace:FindFirstChild("Zones")
+            and workspace.Zones:FindFirstChild(ZoneName)
+            and workspace.Zones[ZoneName]:FindFirstChild("SpawnZone")
 
         if SpawnZone then
             for _, obj in ipairs(SpawnZone:GetChildren()) do
@@ -41,7 +38,8 @@ return function(Parent, ZoneIndex)
         Title = "Refresh List",
         Desc = "Refresh the brainrot list for Zone " .. ZoneIndex,
         Callback = function()
-            Dropdown:Refresh(getBrainrots())
+            local newList = getBrainrots()
+            Dropdown:Refresh(newList)
         end,
     })
 
@@ -51,7 +49,10 @@ return function(Parent, ZoneIndex)
         Callback = function()
             if not SelectedBrainrot or SelectedBrainrot == "No Brainrots Found" then return end
 
-            local SpawnZone = getSpawnZone()
+            local SpawnZone = workspace:FindFirstChild("Zones")
+                and workspace.Zones:FindFirstChild(ZoneName)
+                and workspace.Zones[ZoneName]:FindFirstChild("SpawnZone")
+
             if not SpawnZone then return end
 
             local Target = SpawnZone:FindFirstChild(SelectedBrainrot)
