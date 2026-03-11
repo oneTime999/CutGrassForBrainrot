@@ -16,12 +16,6 @@ local Window = WindUI:CreateWindow({
     SideBarWidth = 200,
 })
 
-Window:Intro({
-    Icon   = "zap",
-    Title  = "Slow Hub",
-    Slogan = "Made by Slow Hub Team",
-    Color  = Color3.fromRGB(100, 180, 255),
-})
 
 local Tabs = {
     "main",
